@@ -9,6 +9,13 @@ import { STUDENTS } from '../students.list';
 })
 export class StudentsComponent implements OnInit {
   students = STUDENTS;
+  light = true;
+  toggle(): void {
+    this.light = !this.light;
+  }
+  remove(index) {
+    this.students.splice(index, 1);
+  }
   constructor() { }
 
   ngOnInit() {

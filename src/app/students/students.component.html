@@ -1,8 +1,21 @@
 <p>students works!</p>
 <table>
-  <tr *ngFor="let student of students">
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Surname</th>
+    <th>Age</th>
+    <th>Average mark</th>
+  </tr>
+  <tr *ngFor="let student of students; let i = index" [class.red]="student.avgmark < 4 && light">
     <td>{{student.id}}</td>
     <td>{{student.name}}</td>
+    <td>{{student.surname}}</td>
     <td>{{student.age}}</td>
+    <td>{{student.avgmark}}</td>
+    <td><button (click)="remove(i)">Delete</button></td>
   </tr>
 </table>
+<div>
+  <button (click)="toggle()">Off lights of row</button>
+</div>
