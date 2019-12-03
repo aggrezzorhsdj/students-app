@@ -1,11 +1,11 @@
 <h1>List of students</h1>
 <table>
   <tr>
-    <th>ID</th>
-    <th>Name</th>
-    <th>Surname</th>
-    <th>Age</th>
-    <th>Average mark</th>
+    <th (click)="sortby('id')">ID</th>
+    <th (click)="sortby('name')">Name</th>
+    <th (click)="sortby('surname')">Surname</th>
+    <th (click)="sortby('age')">Age</th>
+    <th (click)="sortby('avgmark')">Average mark</th>
   </tr>
   <tr *ngFor="let student of students; let i = index" [class.red]="student.avgmark < 4 && light">
     <td>{{student.id}}</td>
@@ -19,3 +19,4 @@
 <div>
   <button (click)="toggle()">Off lights of row</button>
 </div>
+<app-modal (onChanged)="onCloseModal($event)"></app-modal>
