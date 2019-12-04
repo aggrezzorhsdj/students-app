@@ -3,16 +3,17 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { StudentsComponent } from './students/students.component';
-import { ModalComponent } from './modal/modal.component';
+import { PopupComponent } from './popup/popup.component';
+import {PopUpModule} from './popup/popup.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     StudentsComponent,
-    ModalComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    PopUpModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -11,24 +11,46 @@ export class StudentsComponent implements OnInit {
   light = true;
   type = true;
   index: number;
-  clickCnt = 0;
+  popUpOpen = false;
   toggle(): void {
     this.light = !this.light;
   }
   remove(index): void {
-    this.students.splice(this.index, 1);
+    this.index = index;
   }
   sortby(field): void {
     this.students.sort((a, b): number => {
-      const fieldA = typeof a[field] === 'string' ? a[field].length : a[field];
-      const fieldB = typeof b[field] === 'string' ? b[field].length : a[field];
       if (this.type) {
-        return fieldA - fieldB;
+        if (a[field] > b[field]) {
+          return 1;
+        }
+        if (a[field] < b[field]) {
+          return -1;
+        }
+        return 0;
       } else {
-        return fieldB - fieldA;
+        if (a[field] > b[field]) {
+          return -1;
+        }
+        if (a[field] < b[field]) {
+          return 1;
+        }
+        return 0;
       }
     });
     this.type = !this.type;
+  }
+
+  openPopUp() {
+    this.popUpOpen = true;
+  }
+  deleteOption() {
+    this.students.splice(this.index, 1);
+    this.popUpOpen = false;
+  }
+
+  cancelOption() {
+    this.popUpOpen = false;
   }
   constructor() {}
 

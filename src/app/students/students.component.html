@@ -19,4 +19,18 @@
 <div>
   <button (click)="toggle()">Off lights of row</button>
 </div>
-<app-modal (onChanged)="onCloseModal($event)"></app-modal>
+<button class="arrow-button" [disabled]="popUpOpen" (click)="openPopUp()">&#x25b6; Show delete pop-up</button>
+<app-popup class="my-prompt" [isOpen]="popUpOpen">
+  <div class="box">
+    <header>
+      <span class="title">Delete Record</span>
+    </header>
+    <main>
+      Are you sure you want to delete this record?
+    </main>
+    <footer>
+      <button (click)="deleteOption()">&lt;&nbsp;Delete&nbsp;&gt;</button>
+      <button (click)="cancelOption()">&lt;&nbsp;Cancel&nbsp;&gt;</button>
+    </footer>
+  </div>
+</app-popup>
