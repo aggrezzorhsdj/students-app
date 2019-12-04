@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import { STUDENTS } from '../students.list';
 
 @Component({
   selector: 'app-students',
   templateUrl: './students.component.html',
-  styleUrls: ['./students.component.css']
+  styleUrls: ['./students.component.css'],
 })
 export class StudentsComponent implements OnInit {
   students = STUDENTS;
@@ -17,6 +17,7 @@ export class StudentsComponent implements OnInit {
   }
   remove(index): void {
     this.index = index;
+    this.popUpOpen = true;
   }
   sortby(field): void {
     this.students.sort((a, b): number => {
