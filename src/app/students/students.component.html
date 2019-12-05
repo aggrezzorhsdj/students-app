@@ -1,36 +1,45 @@
-<h1>List of students</h1>
-<table>
-  <tr>
-    <th (click)="sortby('id')">ID</th>
-    <th (click)="sortby('name')">Name</th>
-    <th (click)="sortby('surname')">Surname</th>
-    <th (click)="sortby('age')">Age</th>
-    <th (click)="sortby('avgmark')">Average mark</th>
-  </tr>
-  <tr *ngFor="let student of students; let i = index" [class.red]="student.avgmark < 4 && light">
-    <td>{{student.id}}</td>
-    <td>{{student.name}}</td>
-    <td>{{student.surname}}</td>
-    <td>{{student.age}}</td>
-    <td>{{student.avgmark}}</td>
-    <td><button (click)="remove(i)">Delete</button></td>
-  </tr>
-</table>
-<div>
-  <button (click)="toggle()">Off lights of row</button>
+<div class="container">
+  <h1>List of students</h1>
+  <div class="table">
+    <table class="main-list" border="1">
+      <tr>
+        <th (click)="sortby('id')">ID</th>
+        <th (click)="sortby('name')">Name</th>
+        <th (click)="sortby('surname')">Surname</th>
+        <th (click)="sortby('age')">Age</th>
+        <th (click)="sortby('avgmark')">Average mark</th>
+        <th>&nbsp;</th>
+      </tr>
+      <tr *ngFor="let student of students;
+    let i = index;
+    let odd = odd;
+    let even = even;"
+          [class.red]="student.avgmark < 4 && light"
+          [ngClass]="{odd: odd, even: even}">
+        <td>{{student.id}}</td>
+        <td>{{student.name}}</td>
+        <td>{{student.surname}}</td>
+        <td>{{student.age}}</td>
+        <td>{{student.avgmark}}</td>
+        <td><button class="btn btn-nofx" (click)="remove(i)">X</button></td>
+      </tr>
+    </table>
+  </div>
+  <div class="form-button">
+    <button class= "btn" (click)="toggle()">Off lights of row</button>
+  </div>
 </div>
-<button class="arrow-button" [disabled]="popUpOpen" (click)="openPopUp()">&#x25b6; Show delete pop-up</button>
 <app-popup class="my-prompt" [isOpen]="popUpOpen">
   <div class="box">
-    <header>
+    <header class="header">
       <span class="title">Delete Record</span>
     </header>
-    <main>
+    <main class="main">
       Are you sure you want to delete this record?
     </main>
-    <footer>
-      <button (click)="deleteOption()">&lt;&nbsp;Delete&nbsp;&gt;</button>
-      <button (click)="cancelOption()">&lt;&nbsp;Cancel&nbsp;&gt;</button>
+    <footer class="footer">
+      <button class="btn btn-light btn-aborder btn-nofx" (click)="deleteOption()">&lt;&nbsp;Delete&nbsp;&gt;</button>
+      <button class="btn btn-light btn-aborder btn-nofx" (click)="cancelOption()">&lt;&nbsp;Cancel&nbsp;&gt;</button>
     </footer>
   </div>
 </app-popup>

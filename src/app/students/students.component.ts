@@ -4,7 +4,7 @@ import { STUDENTS } from '../students.list';
 @Component({
   selector: 'app-students',
   templateUrl: './students.component.html',
-  styleUrls: ['./students.component.css'],
+  styleUrls: ['./students.component.less'],
 })
 export class StudentsComponent implements OnInit {
   students = STUDENTS;
