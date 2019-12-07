@@ -41,7 +41,13 @@ export class StudentsComponent implements OnInit {
     });
     this.type = !this.type;
   }
-
+  formatTime(timestamp): string {
+    const t: Date = new Date(timestamp);
+    const day = t.getDay();
+    const month = t.getMonth();
+    const year = t.getFullYear();
+    return `${day}/${month}/${year}`;
+  }
   openPopUp() {
     this.popUpOpen = true;
   }

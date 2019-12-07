@@ -5,4 +5,5 @@ export interface IStudents {
   age: number;
   groupname: string;
   avgmark: number;
+  birthday: number;
 }

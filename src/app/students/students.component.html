@@ -1,12 +1,14 @@
 <div class="container">
   <h1>List of students</h1>
   <div class="table">
-    <table class="main-list" border="1">
+    <table class="main-list">
       <tr>
         <th (click)="sortby('id')">ID</th>
         <th (click)="sortby('name')">Name</th>
         <th (click)="sortby('surname')">Surname</th>
+        <th (click)="sortby('birthday')">Birthday</th>
         <th (click)="sortby('age')">Age</th>
+        <th (click)="sortby('groupname')">Group</th>
         <th (click)="sortby('avgmark')">Average mark</th>
         <th>&nbsp;</th>
       </tr>
@@ -19,7 +21,9 @@
         <td>{{student.id}}</td>
         <td>{{student.name}}</td>
         <td>{{student.surname}}</td>
+        <td>{{formatTime(student.birthday)}}</td>
         <td>{{student.age}}</td>
+        <td>{{student.groupname}}</td>
         <td>{{student.avgmark}}</td>
         <td><button class="btn btn-nofx" (click)="remove(i)">X</button></td>
       </tr>
