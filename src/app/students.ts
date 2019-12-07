@@ -6,4 +6,5 @@ export interface IStudents {
   groupname: string;
   avgmark: number;
   birthday: number;
+  flage: boolean;
 }

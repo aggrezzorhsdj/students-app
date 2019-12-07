@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { StudentsComponent } from './students/students.component';
 import { PopupComponent } from './popup/popup.component';
 import {PopUpModule} from './popup/popup.module';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import {PopUpModule} from './popup/popup.module';
   ],
   imports: [
     BrowserModule,
-    PopUpModule
+    PopUpModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

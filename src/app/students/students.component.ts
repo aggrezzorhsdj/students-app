@@ -9,17 +9,32 @@ import { STUDENTS } from '../students.list';
 export class StudentsComponent implements OnInit {
   students = STUDENTS;
   light = true;
+  isExist = true;
   type = true;
   index: number;
   popUpOpen = false;
   toggle(): void {
     this.light = !this.light;
   }
+  search(str: string | number, field: string): void {
+    this.students.forEach((element, index) => {
+      if (element[field] == str) {
+        element.flage = true;
+      } else {
+        element.flage = false;
+      }
+    });
+  }
   remove(index): void {
     this.index = index;
     this.popUpOpen = true;
   }
-  sortby(field): void {
+  sortby(field: string, type?: string): void {
+    if (type && type === 'true') {
+      this.type = true;
+    } else if (type && type === 'false') {
+      this.type = false;
+    }
     this.students.sort((a, b): number => {
       if (this.type) {
         if (a[field] > b[field]) {

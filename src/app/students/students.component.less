@@ -30,6 +30,9 @@
     margin-bottom: 2rem;
   }
 }
+.form-group{
+  margin-bottom: 1rem;
+}
 .btn{
   background: transparent;
   color: #000;
@@ -40,6 +43,9 @@
   will-change: transform;
   transform: none;
   cursor: pointer;
+  &.btn-small{
+    padding: 0.5rem 1rem;
+  }
   &.btn-light{
     border-color: #fff;
     color: #fff;
@@ -71,8 +77,19 @@
     box-shadow: none;
   }
 }
+.actions{
+  display: flex;
+  & .actions__item{
+    margin-bottom: 2rem;
+    padding: 0 2rem;
+  }
+}
 .red{
   background-color: #ee3826;
+  color: #fff;
+}
+.green{
+  background-color: #86ee80;
   color: #fff;
 }
 .main{

@@ -1,5 +1,35 @@
 <div class="container">
   <h1>List of students</h1>
+  <div class="actions">
+    <div class="actions__item">
+      <label>Sort by field</label>
+      <div class="form-group">
+        <select #selected>
+          <option name="id" value="id">ID</option>
+          <option name="name" value="name">name</option>
+          <option name="surname" value="surname">surname</option>
+          <option name="birthday" value="birthday">birthday</option>
+          <option name="age" value="age">age</option>
+        </select>
+        <select #sort>
+          <option value="true">ASC</option>
+          <option value="false">DESC</option>
+        </select>
+      </div>
+      <button class="btn btn-small" (click)="sortby(selected.value, sort.value)">Get</button>
+    </div>
+    <div class="actions__item">
+      <label>Search student by field</label>
+      <div class="form-group">
+        <select #searchfield>
+          <option name="name" value="name">name</option>
+          <option name="surname" value="surname">surname</option>
+        </select>
+        <input type="text" #str placeholder="enter the word"/>
+      </div>
+      <button class="btn btn-small" (click)="search(str.value, searchfield.value)">Search</button>
+    </div>
+  </div>
   <div class="table">
     <table class="main-list">
       <tr>
@@ -12,12 +42,8 @@
         <th (click)="sortby('avgmark')">Average mark</th>
         <th>&nbsp;</th>
       </tr>
-      <tr *ngFor="let student of students;
-    let i = index;
-    let odd = odd;
-    let even = even;"
-          [class.red]="student.avgmark < 4 && light"
-          [ngClass]="{odd: odd, even: even}">
+      <tr [ngClass] = "{'green': student.flage, 'red':student.avgmark < 4 && light}" *ngFor="let student of students;
+    let i = index;">
         <td>{{student.id}}</td>
         <td>{{student.name}}</td>
         <td>{{student.surname}}</td>
