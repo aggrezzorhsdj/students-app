@@ -2,16 +2,18 @@
   <h1>List of students</h1>
   <div class="actions">
     <div class="actions__item">
-      <label>Sort by field</label>
+      <label class="form-label">Sort by field</label>
       <div class="form-group">
-        <select #selected>
+        <select #selected class="form-control">
           <option name="id" value="id">ID</option>
           <option name="name" value="name">name</option>
           <option name="surname" value="surname">surname</option>
           <option name="birthday" value="birthday">birthday</option>
           <option name="age" value="age">age</option>
         </select>
-        <select #sort>
+      </div>
+      <div class="form-group">
+        <select #sort class="form-control">
           <option value="true">ASC</option>
           <option value="false">DESC</option>
         </select>
@@ -19,13 +21,15 @@
       <button class="btn btn-small" (click)="sortby(selected.value, sort.value)">Get</button>
     </div>
     <div class="actions__item">
-      <label>Search student by field</label>
+      <label class="form-label">Search student by field</label>
       <div class="form-group">
-        <select #searchfield>
+        <select #searchfield class="form-control">
           <option name="name" value="name">name</option>
           <option name="surname" value="surname">surname</option>
         </select>
-        <input type="text" #str placeholder="enter the word"/>
+      </div>
+      <div class="form-group">
+        <input class="form-control" type="text" #str placeholder="enter the word"/>
       </div>
       <button class="btn btn-small" (click)="search(str.value, searchfield.value)">Search</button>
     </div>
@@ -58,9 +62,13 @@
   <div class="form-button">
     <button class= "btn" (click)="toggle()">Off lights of row</button>
   </div>
+  <div class="form-button">
+    <button class= "btn" (click)="this.target = 'addStudent'; this.popUpOpen = true">Add new students</button>
+  </div>
+
 </div>
 <app-popup class="my-prompt" [isOpen]="popUpOpen">
-  <div class="box">
+  <div class="box" *ngIf="target == 'box'">
     <header class="header">
       <span class="title">Delete Record</span>
     </header>
@@ -72,4 +80,16 @@
       <button class="btn btn-light btn-aborder btn-nofx" (click)="cancelOption()">&lt;&nbsp;Cancel&nbsp;&gt;</button>
     </footer>
   </div>
+  <div class="box" *ngIf="target == 'addStudent'">
+    <header class="header">
+      <span class="title">Add student</span>
+    </header>
+    <main class="main">
+      <app-add-form></app-add-form>
+    </main>
+    <footer class="footer">
+      <button class="btn btn-light btn-aborder btn-nofx" (click)="cancelOption()">&lt;&nbsp;Cancel&nbsp;&gt;</button>
+    </footer>
+  </div>
 </app-popup>
+

@@ -1,5 +1,6 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import { STUDENTS } from '../students.list';
+import { IStudents } from '../students';
 
 @Component({
   selector: 'app-students',
@@ -13,8 +14,12 @@ export class StudentsComponent implements OnInit {
   type = true;
   index: number;
   popUpOpen = false;
+  target;
   toggle(): void {
     this.light = !this.light;
+  }
+  addStudents(students: IStudents): void {
+    this.students.push(students);
   }
   search(str: string | number, field: string): void {
     this.students.forEach((element, index) => {
@@ -28,6 +33,7 @@ export class StudentsComponent implements OnInit {
   remove(index): void {
     this.index = index;
     this.popUpOpen = true;
+    this.target = 'box';
   }
   sortby(field: string, type?: string): void {
     if (type && type === 'true') {
@@ -62,9 +68,6 @@ export class StudentsComponent implements OnInit {
     const month = t.getMonth();
     const year = t.getFullYear();
     return `${day}/${month}/${year}`;
-  }
-  openPopUp() {
-    this.popUpOpen = true;
   }
   deleteOption() {
     this.students.splice(this.index, 1);

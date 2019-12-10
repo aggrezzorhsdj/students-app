@@ -1,0 +1,25 @@
+:host{
+  .form-control{
+    background: transparent;
+    color: #000;
+    border: solid #000;
+    border-width: 0 0.1rem;
+    padding: 0.2rem 0.6rem;
+    outline: none;
+    &.__white{
+      color:#fff;
+      border-color: #fff;
+      &::-webkit-input-placeholder{
+        color:#fff;
+      }
+    }
+    &::-webkit-input-placeholder{
+      color:#000;
+      opacity: 0.5;
+    }
+  }
+  .form-group{
+    border: none;
+    outline: none;
+  }
+}

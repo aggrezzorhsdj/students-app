@@ -5,17 +5,20 @@ import { AppComponent } from './app.component';
 import { StudentsComponent } from './students/students.component';
 import { PopupComponent } from './popup/popup.component';
 import {PopUpModule} from './popup/popup.module';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { AddFormComponent } from './add-form/add-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     StudentsComponent,
+    AddFormComponent,
   ],
   imports: [
     BrowserModule,
     PopUpModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
