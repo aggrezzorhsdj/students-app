@@ -23,7 +23,7 @@ export class StudentsComponent implements OnInit {
   }
   search(str: string | number, field: string): void {
     this.students.forEach((element, index) => {
-      if (element[field] == str) {
+      if (element[field] === str) {
         element.flage = true;
       } else {
         element.flage = false;

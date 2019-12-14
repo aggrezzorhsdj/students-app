@@ -1,24 +1,32 @@
 <form [formGroup]="addForm" novalidate (submit)="submitForm($event)">
-  <fieldset class="form-group" formGroupName="userFullName">
-    <div class="form-group">
-      <input class="form-control __white" type="text" formControlName="userFirstName" placeholder="first name"/>
+  <div class="row">
+    <div class="row form-group form-group-multiple col-12" formGroupName="userFullName">
+      <div class="form-group col-6">
+        <input class="form-control __white" type="text" formControlName="userFirstName" placeholder="first name"/>
+      </div>
+      <div class="form-group col-6">
+        <input class="form-control __white" type="text" formControlName="userLastName" placeholder="last name"/>
+        <div *ngIf="addForm.get('userFullName').getError('notEqual') && addForm.get('userFullName').touched" class="alert">
+          {{addForm.get('userFullName').getError('notEqual')}}
+        </div>
+      </div>
     </div>
-    <div class="form-group">
-      <input class="form-control __white" type="text" formControlName="userLastName" placeholder="last name"/>
+    <div class="form-group col-6">
+      <input class="form-control __white" type="text" formControlName="userGroupName" placeholder="Group"/>
     </div>
-  </fieldset>
-  <div class="form-group">
-    <input class="form-control __white" type="text" formControlName="userGroupName" placeholder="Group"/>
-  </div>
-  <div class="form-group">
-    <input class="form-control __white" type="number" formControlName="userAge" placeholder="Age"/>
-  </div>
-  <div class="form-group">
-    <input class="form-control __white" type="text" formControlName="userAvgMark" placeholder="Average mark"/>
-  </div>
-  <div class="form-group">
-    <input class="form-control __white" type="date" formControlName="userBirthDay" placeholder="birthday"/>
+    <div class="form-group col-6">
+      <input class="form-control __white" type="number" formControlName="userAge" placeholder="Age"/>
+    </div>
+    <div class="form-group col-6">
+      <input class="form-control __white" type="text" formControlName="userAvgMark" placeholder="Average mark"/>
+    </div>
+    <div class="form-group col-6">
+      <input class="form-control __white" type="date" formControlName="userBirthDay" placeholder="birthday"/>
+      <div *ngIf="addForm.get('userBirthDay').getError('errorBirthDay') && addForm.get('userBirthDay').touched" class="alert">
+        {{addForm.get('userBirthDay').getError('errorBirthDay')}}
+      </div>
+    </div>
   </div>
   <input class="form-control __white" type="text" formControlName="userFlage" hidden/>
-  <button type="submit" class="btn btn-light btn-aborder btn-nofx" [disabled]="addForm.invalid">< Submit ></button>
+  <button type="submit" class="btn btn-light btn-aborder btn-nofx">< Submit ></button>
 </form>

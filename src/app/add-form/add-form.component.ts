@@ -1,6 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
-import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, ValidatorFn,
-  Validators } from '@angular/forms';
+import {
+  AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn,
+  Validators
+} from '@angular/forms';
 import { STUDENTS } from '../students.list';
 import { IStudents } from '../students';
 
@@ -10,22 +12,44 @@ import { IStudents } from '../students';
   styleUrls: ['./add-form.component.less']
 })
 export class AddFormComponent implements OnInit {
-  @Input() isOpen = false;
-  addForm: FormGroup;
   students = STUDENTS;
-  constructor() {
-    this.addForm = new FormGroup({
-      userId: new FormControl('6'),
-      userFullName: new FormGroup({
-        userFirstName: new FormControl('', Validators.required),
-        userLastName: new FormControl('', Validators.required),
-      }),
-      userGroupName: new FormControl('', Validators.required),
-      userAge: new FormControl('', Validators.required),
-      userAvgMark: new FormControl('', Validators.required),
-      userBirthDay: new FormControl(this.currentDate(), Validators.required),
-      userFlage: new FormControl('false'),
+  addForm: FormGroup;
+  constructor(private formBuilder: FormBuilder) {
+    this.addForm = this.formBuilder.group({
+      userId: '6',
+      userFullName: this.formBuilder.group({
+        userFirstName: ['', Validators.required],
+        userLastName: ['', Validators.required],
+      }, {validator: this.userNameValidator}),
+      userGroupName: ['', Validators.required],
+      userAge: ['', Validators.required],
+      userAvgMark: ['', Validators.required],
+      userBirthDay: ['', [Validators.required, this.userBirthDateValidator]],
+      userFlage: false,
     });
+  }
+  public userNameValidator(group: FormGroup) {
+    const userFirstName = group.controls.userFirstName.value;
+    const userLastName = group.controls.userLastName.value;
+
+    if (userFirstName === userLastName) {
+        return {
+          notEqual: 'First name and last name must be not equal'
+        };
+    } else {
+      return null;
+    }
+  }
+  public userBirthDateValidator(control: FormControl) {
+    const currDate = new Date();
+    const birthDate = new Date(control.value);
+    if (birthDate.getFullYear() > (currDate.getFullYear() - 10)) {
+      return {
+        errorBirthDay: 'Year of birthday must be less 10 years'
+      };
+    } else {
+      return null;
+    }
   }
   currentDate() {
     const currentDate = new Date();
