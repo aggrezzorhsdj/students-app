@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import { STUDENTS } from '../students.list';
 import { IStudents } from '../students';
+import { EditFormComponent } from '../edit-form/edit-form.component';
 
 @Component({
   selector: 'app-students',
@@ -77,9 +78,11 @@ export class StudentsComponent implements OnInit {
   cancelOption() {
     this.popUpOpen = false;
   }
+  public setStudentIndex(index: number): void {
+    this.index = index;
+  }
   constructor() {}
 
   ngOnInit() {
   }
-
 }

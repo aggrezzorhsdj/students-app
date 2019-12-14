@@ -44,6 +44,7 @@
         <th (click)="sortby('age')">Age</th>
         <th (click)="sortby('groupname')">Group</th>
         <th (click)="sortby('avgmark')">Average mark</th>
+        <th>Edit</th>
         <th>&nbsp;</th>
       </tr>
       <tr [ngClass] = "{'green': student.flage, 'red':student.avgmark < 4 && light}" *ngFor="let student of students;
@@ -55,6 +56,7 @@
         <td>{{student.age}}</td>
         <td>{{student.groupname}}</td>
         <td>{{student.avgmark}}</td>
+        <td><button class="btn btn-nofx" (click)="setStudentIndex(i); this.target = 'editStudent'; this.popUpOpen = true">Edit</button></td>
         <td><button class="btn btn-nofx" (click)="remove(i)">X</button></td>
       </tr>
     </table>
@@ -86,6 +88,17 @@
     </header>
     <main class="main">
       <app-add-form></app-add-form>
+    </main>
+    <footer class="footer">
+      <button class="btn btn-light btn-aborder btn-nofx" (click)="cancelOption()">&lt;&nbsp;Cancel&nbsp;&gt;</button>
+    </footer>
+  </div>
+  <div class="box" *ngIf="target == 'editStudent'">
+    <header class="header">
+      <span class="title">Edit student</span>
+    </header>
+    <main class="main">
+      <app-edit-form [indexElement]="index"></app-edit-form>
     </main>
     <footer class="footer">
       <button class="btn btn-light btn-aborder btn-nofx" (click)="cancelOption()">&lt;&nbsp;Cancel&nbsp;&gt;</button>

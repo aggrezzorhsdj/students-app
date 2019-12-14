@@ -1,21 +1,20 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {
-  AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn,
-  Validators
-} from '@angular/forms';
-import { STUDENTS } from '../students.list';
-import { IStudents } from '../students';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {IStudents} from '../students';
+import {STUDENTS} from '../students.list';
 
 @Component({
-  selector: 'app-add-form',
-  templateUrl: './add-form.component.html',
-  styleUrls: ['./add-form.component.less']
+  selector: 'app-edit-form',
+  templateUrl: './edit-form.component.html',
+  styleUrls: ['./edit-form.component.css']
 })
-export class AddFormComponent implements OnInit {
+export class EditFormComponent implements OnInit {
   students = STUDENTS;
-  addForm: FormGroup;
+  index: number;
+  editForm: FormGroup;
   constructor(private formBuilder: FormBuilder) {
-    this.addForm = this.formBuilder.group({
+    this.editForm = this.formBuilder.group({
+      userId: '6',
       userFullName: this.formBuilder.group({
         userFirstName: ['', Validators.required],
         userLastName: ['', Validators.required],
@@ -27,14 +26,18 @@ export class AddFormComponent implements OnInit {
       userFlage: false,
     });
   }
+  @Input()
+  set indexElement(index: number) {
+    this.index = index ? index : 0;
+  }
   public userNameValidator(group: FormGroup) {
     const userFirstName = group.controls.userFirstName.value;
     const userLastName = group.controls.userLastName.value;
 
     if (userFirstName === userLastName) {
-        return {
-          notEqual: 'First name and last name must be not equal'
-        };
+      return {
+        notEqual: 'First name and last name must be not equal'
+      };
     } else {
       return null;
     }
@@ -50,29 +53,33 @@ export class AddFormComponent implements OnInit {
       return null;
     }
   }
-  currentDate() {
+  public currentDate() {
     const currentDate = new Date();
     return currentDate.toISOString().substring(0, 10);
   }
+  public setStudentIndex(index: number): void {
+    this.index = index;
+  }
   public submitForm(e: Event) {
+    console.log(this.index);
     e.preventDefault();
-    if (this.addForm.valid) {
+    if (this.editForm.valid) {
       const added: IStudents = {
-        id: this.students.length + 1,
-        name: this.addForm.get('userFullName').get('userFirstName').value,
-        surname: this.addForm.get('userFullName').get('userLastName').value,
-        age: this.addForm.get('userAge').value,
-        avgmark: this.addForm.get('userAvgMark').value,
-        groupname: this.addForm.get('userGroupName').value,
-        birthday: this.addForm.get('userBirthDay').value,
+        id: this.editForm.get('userId').value,
+        name: this.editForm.get('userFullName').get('userFirstName').value,
+        surname: this.editForm.get('userFullName').get('userLastName').value,
+        age: this.editForm.get('userAge').value,
+        avgmark: this.editForm.get('userAvgMark').value,
+        groupname: this.editForm.get('userGroupName').value,
+        birthday: this.editForm.get('userBirthDay').value,
         flage: false,
       };
-      this.addStudents(added);
+      this.editStudents(added, this.index);
 
     }
   }
-  public addStudents(students: IStudents): void {
-    this.students.push(students);
+  public editStudents(students: IStudents, index: number): void {
+    this.students[index] = students;
   }
   ngOnInit() {
   }
