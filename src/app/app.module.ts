@@ -7,14 +7,12 @@ import { PopupComponent } from './popup/popup.component';
 import {PopUpModule} from './popup/popup.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AddFormComponent } from './add-form/add-form.component';
-import { EditFormComponent } from './edit-form/edit-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     StudentsComponent,
     AddFormComponent,
-    EditFormComponent,
   ],
   imports: [
     BrowserModule,
