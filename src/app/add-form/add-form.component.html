@@ -1,27 +1,29 @@
 <form [formGroup]="addForm" novalidate (submit)="submitForm($event)">
   <div class="row">
-    <div class="row form-group form-group-multiple col-12" formGroupName="userFullName">
-      <div class="form-group col-6">
+    <div class="row form-group form-group-multiple column-12" formGroupName="userFullName">
+      <div class="form-group column-6">
         <input class="form-control __white" type="text" formControlName="userFirstName" placeholder="first name"/>
+        <div class="alert" *ngIf="addForm.get('userFullName').get('userFirstName').hasError('required') && submitted">This field is required *</div>
       </div>
-      <div class="form-group col-6">
+      <div class="form-group column-6">
         <input class="form-control __white" type="text" formControlName="userLastName" placeholder="last name"/>
+        <div class="alert" *ngIf="addForm.get('userFullName').get('userLastName').hasError('required') && submitted">This field is required *</div>
         <div *ngIf="addForm.get('userFullName').getError('notEqual') && addForm.get('userFullName').touched" class="alert">
           {{addForm.get('userFullName').getError('notEqual')}}
         </div>
       </div>
     </div>
-    <div class="form-group col-6">
+    <div class="form-group column-6">
       <input class="form-control __white" type="text" formControlName="userGroupName" placeholder="Group"/>
+      <div class="alert" *ngIf="addForm.get('userGroupName').hasError('required') && submitted">This field is required *</div>
     </div>
-    <div class="form-group col-6">
-      <input class="form-control __white" type="number" formControlName="userAge" placeholder="Age"/>
-    </div>
-    <div class="form-group col-6">
+    <div class="form-group column-6">
       <input class="form-control __white" type="text" formControlName="userAvgMark" placeholder="Average mark"/>
+      <div class="alert" *ngIf="addForm.get('userAvgMark').hasError('required') && submitted">This field is required *</div>
     </div>
-    <div class="form-group col-6">
+    <div class="form-group column-6">
       <input class="form-control __white" type="date" formControlName="userBirthDay" placeholder="birthday"/>
+      <div class="alert" *ngIf="addForm.get('userBirthDay').hasError('required') && submitted">This field is required *</div>
       <div *ngIf="addForm.get('userBirthDay').getError('errorBirthDay') && addForm.get('userBirthDay').touched" class="alert">
         {{addForm.get('userBirthDay').getError('errorBirthDay')}}
       </div>

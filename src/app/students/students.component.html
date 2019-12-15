@@ -87,7 +87,7 @@
       <span class="title">Add student</span>
     </header>
     <main class="main">
-      <app-add-form></app-add-form>
+      <app-add-form [setForm]="false"></app-add-form>
     </main>
     <footer class="footer">
       <button class="btn btn-light btn-aborder btn-nofx" (click)="cancelOption()">&lt;&nbsp;Cancel&nbsp;&gt;</button>
@@ -98,7 +98,7 @@
       <span class="title">Edit student</span>
     </header>
     <main class="main">
-      <app-edit-form [indexElement]="index"></app-edit-form>
+      <app-add-form [indexElement]="index" [setForm]="true"></app-add-form>
     </main>
     <footer class="footer">
       <button class="btn btn-light btn-aborder btn-nofx" (click)="cancelOption()">&lt;&nbsp;Cancel&nbsp;&gt;</button>
