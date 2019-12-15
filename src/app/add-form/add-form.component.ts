@@ -62,7 +62,7 @@ export class AddFormComponent implements OnInit {
     let added: IStudents;
     if (this.addForm.valid) {
       const year: Date = new Date();
-      let curDate: Date = new Date(this.addForm.get('userBirthDay').value);
+      const curDate: Date = new Date(this.addForm.get('userBirthDay').value);
       added = {
         id: this.students.length + 1,
         name: this.addForm.get('userFullName').get('userFirstName').value,
