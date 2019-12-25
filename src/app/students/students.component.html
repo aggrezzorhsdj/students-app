@@ -32,6 +32,7 @@
         <input class="form-control" type="text" #str placeholder="enter the word"/>
       </div>
       <button class="btn btn-small" (click)="search(str.value, searchfield.value)">Search</button>
+      <button class="btn btn-small" (click)="this.isNumber = 0">Reset</button>
     </div>
   </div>
   <div class="table">
@@ -47,12 +48,12 @@
         <th>Edit</th>
         <th>&nbsp;</th>
       </tr>
-      <tr [ngClass] = "{'green': student.flage, 'red':student.avgmark < 4 && light}" *ngFor="let student of students;
+      <tr [ngClass] = "{'green': student.flage,'red': student.avgmark < 4 && light}" [appModer]="isNumber" *ngFor="let student of students;
     let i = index;">
         <td>{{student.id}}</td>
         <td>{{student.name}}</td>
         <td>{{student.surname}}</td>
-        <td>{{formatTime(student.birthday)}}</td>
+        <td>{{student.birthday | CustomDate:'dd-MM-yyyy'}}</td>
         <td>{{student.age}}</td>
         <td>{{student.groupname}}</td>
         <td>{{student.avgmark}}</td>
@@ -90,6 +91,7 @@
       <app-add-form [setForm]="false"></app-add-form>
     </main>
     <footer class="footer">
+
       <button class="btn btn-light btn-aborder btn-nofx" (click)="cancelOption()">&lt;&nbsp;Cancel&nbsp;&gt;</button>
     </footer>
   </div>

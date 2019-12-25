@@ -1,7 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {
-  AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn,
-  Validators
+  FormBuilder, FormControl, FormGroup, Validators
 } from '@angular/forms';
 import { STUDENTS } from '../students.list';
 import { IStudents } from '../students';
@@ -9,20 +8,25 @@ import { IStudents } from '../students';
 @Component({
   selector: 'app-add-form',
   templateUrl: './add-form.component.html',
-  styleUrls: ['./add-form.component.less']
+  styleUrls: ['./add-form.component.less'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AddFormComponent implements OnInit {
-  students = STUDENTS;
-  addForm: FormGroup;
-  index: number;
-  editForm = false;
-  submitted = false;
   constructor(private formBuilder: FormBuilder) {
   }
   @Input()
   set indexElement(index: number) {
     this.index = index ? index : 0;
   }
+  get f() { return this.addForm.controls; }
+  get userFirstName() {
+    return this.addForm.get('userFirstName');
+  }
+  students = STUDENTS;
+  addForm: FormGroup;
+  index: number;
+  editForm = false;
+  submitted = false;
   @Input()
   setForm(b: boolean) {
     this.editForm = b;
@@ -54,7 +58,6 @@ export class AddFormComponent implements OnInit {
     const currentDate = new Date();
     return currentDate.toISOString().substring(0, 10);
   }
-  get f() { return this.addForm.controls; }
   public submitForm(e: Event) {
     this.submitted = true;
     console.log(this.submitted);
@@ -81,6 +84,7 @@ export class AddFormComponent implements OnInit {
           this.editStudents(added, this.index);
           break;
       }
+
     }
   }
   public addStudents(students: IStudents): void {
@@ -88,9 +92,6 @@ export class AddFormComponent implements OnInit {
   }
   public editStudents(students: IStudents, index: number): void {
     this.students[index] = students;
-  }
-  get userFirstName() {
-    return this.addForm.get('userFirstName');
   }
   ngOnInit() {
     this.addForm = this.formBuilder.group({

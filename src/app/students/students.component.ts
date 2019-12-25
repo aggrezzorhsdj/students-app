@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import { STUDENTS } from '../students.list';
 import { IStudents } from '../students';
 
@@ -6,11 +6,12 @@ import { IStudents } from '../students';
   selector: 'app-students',
   templateUrl: './students.component.html',
   styleUrls: ['./students.component.less'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StudentsComponent implements OnInit {
   students = STUDENTS;
   light = true;
-  isExist = true;
+  isNumber = 0;
   type = true;
   index: number;
   popUpOpen = false;
@@ -22,11 +23,10 @@ export class StudentsComponent implements OnInit {
     this.students.push(students);
   }
   search(str: string | number, field: string): void {
+    this.isNumber = 0;
     this.students.forEach((element, index) => {
       if (element[field] === str) {
-        element.flage = true;
-      } else {
-        element.flage = false;
+        this.isNumber = index + 1;
       }
     });
   }
@@ -62,13 +62,13 @@ export class StudentsComponent implements OnInit {
     });
     this.type = !this.type;
   }
-  formatTime(timestamp): string {
-    const t: Date = new Date(timestamp);
-    const day = t.getDay();
-    const month = t.getMonth();
-    const year = t.getFullYear();
-    return `${day}/${month}/${year}`;
-  }
+  // formatTime(timestamp): string {
+  //   const t: Date = new Date(timestamp);
+  //   const day = t.getDay();
+  //   const month = t.getMonth();
+  //   const year = t.getFullYear();
+  //   return t;
+  // }
   deleteOption() {
     this.students.splice(this.index, 1);
     this.popUpOpen = false;
