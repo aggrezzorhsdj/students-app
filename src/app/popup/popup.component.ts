@@ -1,5 +1,5 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
-import { Input } from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, OnInit} from '@angular/core';
+import { Input, Output } from '@angular/core';
 import { openCloseAnimation, openCloseShadeAnimation } from './animations';
 
 @Component({
